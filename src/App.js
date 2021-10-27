@@ -73,14 +73,6 @@ function App() {
 
     <>
     <h2 className="text-top">LOGICON</h2>
-    <div className="search-top">
-    <form action="" className="search-bar">
-	    <input type="search" name="search" pattern=".*\S.*" required/>
-	      <button className="search-btn" type="submit">
-		      <span>Search</span>
-	      </button>
-    </form>
-    </div>
 
     <section className="section-center">
       <form className="grocery-form" onSubmit={handleSubmit}>
@@ -93,7 +85,15 @@ function App() {
             {isEditing ? "edit" : "Submit!"}
           </button>
         </div>
-      </form>
+        </form>
+        
+        <div className="form2-control">
+          <input type="text" className="search-item" placeholder="Search Item"/>
+          <button type="submit" className="submit-btn">
+            Search
+          </button>
+        </div>
+      
       {list.length > 0 && (
         <div className="grocery-container">
           <List items={list} removeItem={removeItem} editItem={editItem} />
