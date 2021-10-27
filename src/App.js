@@ -17,11 +17,14 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name) {
       showAlert(true, "danger", "please enter value");
-    } else if (name && isEditing) {
+    }
+    
+    else if (name && isEditing) {
       setList(
         list.map((item) => {
           if (item.id === editID) {
@@ -33,8 +36,10 @@ function App() {
       setName("");
       setEditID(null);
       setIsEditing(false);
-      showAlert(true, "success", "value changed");
-    } else {
+      showAlert(true, "success", "Item updated");
+    }
+
+    else {
       showAlert(true, "success", "item added to the list");
       const newItem = { id: new Date().getTime().toString(), title: name };
 
@@ -63,7 +68,20 @@ function App() {
   useEffect(() => {
     localStorage.setItem("list", JSON.stringify(list));
   }, [list]);
+  
   return (
+
+    <>
+    <h2 className="text-top">LOGICON</h2>
+    <div className="search-top">
+    <form action="" className="search-bar">
+	    <input type="search" name="search" pattern=".*\S.*" required/>
+	      <button className="search-btn" type="submit">
+		      <span>Search</span>
+	      </button>
+    </form>
+    </div>
+
     <section className="section-center">
       <form className="grocery-form" onSubmit={handleSubmit}>
         {alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />}
@@ -85,6 +103,9 @@ function App() {
         </div>
       )}
     </section>
+
+    </>
+    
   );
 }
 
