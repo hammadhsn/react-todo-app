@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import List from "./components/List";
 import Alert from "./components/Alert";
+import Search from "./components/Search";
 import "./App.css";
 
 const getLocalStorage = () => {
@@ -17,6 +18,16 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+    const handleChange = event => {
+        console.log(event.target.value);
+        setSearchTerm(event.target.value);
+        
+        event.preventDefault();
+    };
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,15 +98,12 @@ function App() {
         </div>
         </form>
         
-        <div className="form2-control">
-          <input type="text" className="search-item" placeholder="Search Item"/>
-          <button type="submit" className="submit-btn">
-            Search
-          </button>
-        </div>
+        
       
       {list.length > 0 && (
         <div className="grocery-container">
+          <Search/>
+
           <List items={list} removeItem={removeItem} editItem={editItem} />
           <button className="clear-btn" onClick={clearList}>
             clear items
