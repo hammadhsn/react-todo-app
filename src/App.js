@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import List from "./components/List";
 import Alert from "./components/Alert";
 import Search from "./components/Search";
+import ModalOpen from "./components/ModalOpen";
 import "./App.css";
 
 const getLocalStorage = () => {
@@ -20,19 +21,16 @@ function App() {
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
 
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchData, setSearchData] = useState("");
 
-  // const handleChange = (event) => {
-  //   console.log(event.target.value);
-  //   setSearchTerm(event.target.value);
-
-  //   event.preventDefault();
-  // };
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [sure, setSure] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name) {
       showAlert(true, "danger", "please enter value");
+
     } else if (name && isEditing) {
       setList(
         list.map((item) => {
@@ -54,17 +52,26 @@ function App() {
       setName("");
     }
   };
-  const searchItem = (data) => {
-    setSearchTerm(data);
-    // console.log(searchTerm);
-  };
   const showAlert = (show = false, type = "", msg = "") => {
     setAlert({ show, type, msg });
   };
-  const clearList = () => {
+  
+const clearItems = () => {
+    if(sure){
     showAlert(true, "danger", "empty list");
     setList([]);
+    setModalIsOpen(false);
+    }
+    else{
+      setModalIsOpen(false);
+    }
+
   };
+
+  
+
+
+
   const removeItem = (id) => {
     showAlert(true, "danger", "item removed");
     setList(list.filter((item) => item.id !== id));
@@ -78,6 +85,12 @@ function App() {
   useEffect(() => {
     localStorage.setItem("list", JSON.stringify(list));
   }, [list]);
+  const inputChangeHandler = (event) => {
+    const data = event.target.value;
+    setSearchData(data);
+    setSearchTerm(data);
+    event.preventDefault();
+  };
 
   return (
     <>
@@ -106,20 +119,28 @@ function App() {
 
         {list.length > 0 && (
           <div className="grocery-container">
-            <Search searchItem={searchItem} />
+            <Search click={inputChangeHandler} value={searchData}/>
 
             <List
               items={list}
               removeItem={removeItem}
               editItem={editItem}
-              searchTerm={searchTerm}
+              searchTerm={searchTerm}     //searchTerm as a value passing to child comp -> (list)
             />
-            <button className="clear-btn" onClick={clearList}>
+            
+            <button className="clear-btn" onClick={() => setModalIsOpen(true)}>
               clear items
             </button>
           </div>
         )}
       </section>
+      <ModalOpen
+              modalIsOpen={modalIsOpen}
+              setModalIsOpen={setModalIsOpen}
+              sure={sure}
+              setSure={setSure}
+              clearItems={clearItems}
+              /> 
     </>
   );
 }
