@@ -40,6 +40,11 @@ body {
   line-height: 1.5;
   font-size: 0.875rem;
 }
+.size-control{
+  min-width: 250px !important;
+  
+
+}
 
 .text-top{
   text-align: center;
@@ -347,16 +352,23 @@ main {
 .modal {
   font-family: sans-serif;
   text-align: center;
+
+
+  background: white;
+
 }
 
 .overlay-base {
+  
   padding: 1rem;
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.39);
+
+  
   opacity: 0;
   transition-property: background-color, opacity;
   transition-duration: 500ms;
@@ -370,6 +382,7 @@ main {
 .overlay-after {
   background-color: rgba(0, 0, 0, 0.8);
   opacity: 1;
+  
 }
 
 .overlay-before {
@@ -400,9 +413,16 @@ main {
 }
 
 .content-after {
-  width: 70%;
+  width: 30%;
   height: 40%;
-  background-color: rgba(250, 190, 190, 0.8);
+  background-color: rgb(240, 240, 240);
+
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+
 }
 
 .content-before {
@@ -410,5 +430,72 @@ main {
   height: 0%;
   background-color: transparent;
 }
+
+.modal-text{
+  font-family: sans-serif;
+  
+  align-items: center;
+  text-align: center;
+  font-weight: 200;
+
+}
+
+
+
+.modal-btn1{
+  background: #2563eb;
+  border-color: transparent;
+  flex: 0 0 5rem;
+ 
+  align-items: center;
+  padding: 0.25rem;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+  cursor: pointer;
+  color: white;
+  transition: var(--transition);
+  font-size: 0.85rem;
+  margin-top: 40px;
+  margin-right: 3rem;
+}
+
+
+.modal-btn2{
+  background: #2563eb;
+  border-color: transparent;
+  flex: 0 0 5rem;
+ 
+  align-items: center;
+  padding: 0.25rem;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+  cursor: pointer;
+  color: white;
+  transition: var(--transition);
+  font-size: 0.85rem;
+  margin-top: 40px;
+  margin-left: 1rem;
+}
+
+.modal-btn-div{
+  align-items: center;
+  justify-content:center;
+  position: absolute;
+  margin-top: 100px;
+
+}
+
+
+
 
 

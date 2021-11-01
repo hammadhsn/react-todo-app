@@ -56,19 +56,22 @@ function App() {
     setAlert({ show, type, msg });
   };
   
-const clearItems = () => {
-    if(sure){
-    showAlert(true, "danger", "empty list");
-    setList([]);
+  const closeModal = () => {
     setModalIsOpen(false);
-    }
-    else{
-      setModalIsOpen(false);
-    }
-
+    console.log("Modal Closed");
   };
-
   
+  useEffect(()=>{
+    if(sure){
+      showAlert(true, "danger", "empty list");
+      setList([]);
+      setModalIsOpen(false);
+      setSure(false);
+      }
+        
+  
+  },[sure]);
+
 
 
 
@@ -137,9 +140,10 @@ const clearItems = () => {
       <ModalOpen
               modalIsOpen={modalIsOpen}
               setModalIsOpen={setModalIsOpen}
-              sure={sure}
               setSure={setSure}
-              clearItems={clearItems}
+              closeModal={closeModal}
+
+
               /> 
     </>
   );
